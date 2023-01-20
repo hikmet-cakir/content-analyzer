@@ -10,10 +10,10 @@
     </parent>
 
     <groupId>com.analyzer</groupId>
-    <artifactId>contentEntity-analyzer</artifactId>
+    <artifactId>content-analyzer</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>contentEntity-analyzer</name>
-    <description>contentEntity-analyzer</description>
+    <name>content-analyzer</name>
+    <description>content-analyzer</description>
 
     <properties>
         <java.version>11</java.version>
