@@ -6,6 +6,10 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+/**
+ * @author Hikmet
+ * @since 21-01-2023+03:00
+ */
 @Service
 public class MediumService implements IMediumService {
 

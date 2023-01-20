@@ -4,6 +4,10 @@ import lombok.Data;
 
 import java.util.List;
 
+/**
+ * @author Hikmet
+ * @since 21-01-2023+03:00
+ */
 @Data
 public class MediumItemResponse {
 
