@@ -1,5 +1,6 @@
 package com.analyzer.content.external.medium.dto;
 
+import lombok.Builder;
 import lombok.Data;
 
 import java.util.List;
@@ -9,6 +10,7 @@ import java.util.List;
  * @since 21-01-2023+03:00
  */
 @Data
+@Builder
 public class MediumItemResponse {
 
     private String title;

@@ -10,5 +10,5 @@ import java.util.List;
  */
 public interface IMediumService {
 
-    List<MediumItemResponse> getAllStories();
+    List<MediumItemResponse> getAllStories(String userName);
 }
