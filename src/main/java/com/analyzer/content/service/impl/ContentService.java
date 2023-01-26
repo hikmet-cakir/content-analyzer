@@ -6,6 +6,7 @@ import com.analyzer.content.mapper.ContentMapper;
 import com.analyzer.content.model.Content;
 import com.analyzer.content.repository.ContentRepository;
 import com.analyzer.content.service.IContentService;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -16,6 +17,7 @@ import java.util.stream.Collectors;
  * @author Hikmet
  * @since 13-01-2023+03:00
  */
+@Slf4j
 @Service
 public class ContentService implements IContentService {
 
@@ -45,6 +47,7 @@ public class ContentService implements IContentService {
                 .build();
         ContentEntity contentEntity = ContentMapper.INSTANCE.toContentEntity(content);
         ContentEntity savedContent = contentRepository.save(contentEntity);
+        log.info("content was successfully saved. Content ID:{}", savedContent.getId());
         return UploadContentResponse.builder()
                 .id(savedContent.getId())
                 .build();
@@ -57,6 +60,7 @@ public class ContentService implements IContentService {
         contentEntity.setLocation(modifyContentRequest.getLocation());
         contentEntity.setText(modifyContentRequest.getText());
         contentRepository.save(contentEntity);
+        log.info("content was successfully modified. Content ID:{}", id);
         return ModifyContentResponse.builder()
                 .id(contentEntity.getId())
                 .location(contentEntity.getLocation())
@@ -71,5 +75,6 @@ public class ContentService implements IContentService {
         contentRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("The id gave was not found!"));
         contentRepository.deleteById(id);
+        log.info("Delete operation was successfully completed. Content ID:{}", id);
     }
 }
