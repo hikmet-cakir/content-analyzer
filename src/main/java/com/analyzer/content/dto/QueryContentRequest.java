@@ -10,4 +10,8 @@ import lombok.Data;
 public class QueryContentRequest {
 
     private String id;
+
+    private String location;
+
+    private String text;
 }

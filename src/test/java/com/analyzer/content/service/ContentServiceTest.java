@@ -2,24 +2,22 @@ package com.analyzer.content.service;
 
 import com.analyzer.content.dto.*;
 import com.analyzer.content.entity.ContentEntity;
+import com.analyzer.content.model.Content;
 import com.analyzer.content.repository.ContentRepository;
 import com.analyzer.content.service.impl.ContentService;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
 
+import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
 import static org.junit.jupiter.api.Assertions.*;
-import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
-import static org.junit.jupiter.api.Assertions.assertThrows;
-import static org.mockito.Mockito.*;
+import static org.mockito.Mockito.any;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
@@ -115,24 +113,27 @@ public class ContentServiceTest {
         // Given
         String id = UUID.randomUUID().toString();
 
+        QueryContentRequest request = new QueryContentRequest();
+        request.setId(id);
+
         ContentEntity exampleContent = new ContentEntity();
         exampleContent.setId(id);
         exampleContent.setText("LinkedIn");
         exampleContent.setLocation("The economy of the world in the last days");
-        when(contentRepository.findById(id)).thenReturn(Optional.of(exampleContent));
-
-        QueryContentRequest request = new QueryContentRequest();
-        request.setId(id);
+        when(contentRepository.queryContent(request)).thenReturn(List.of(exampleContent));
 
         // When
         QueryContentResponse actual = contentService.queryContent(request);
 
         // Then
-        QueryContentResponse expected = QueryContentResponse.builder()
+        Content expectedContent = Content.builder()
                 .id(id)
                 .text("LinkedIn")
                 .location("The economy of the world in the last days")
                 .build();
-        assertEquals(expected.getId(), actual.getId());
+        QueryContentResponse expected = QueryContentResponse.builder()
+                .contents(List.of(expectedContent))
+                .build();
+        assertIterableEquals(expected.getContents(), actual.getContents());
     }
 }

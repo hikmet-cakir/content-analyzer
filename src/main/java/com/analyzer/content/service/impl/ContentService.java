@@ -8,8 +8,9 @@ import com.analyzer.content.repository.ContentRepository;
 import com.analyzer.content.service.IContentService;
 import org.springframework.stereotype.Service;
 
-import java.util.Optional;
+import java.util.List;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 /**
  * @author Hikmet
@@ -26,16 +27,12 @@ public class ContentService implements IContentService {
 
     @Override
     public QueryContentResponse queryContent(QueryContentRequest queryContentRequest) {
-        ContentEntity contentEntity = contentRepository.findById(queryContentRequest.getId())
-                .orElseThrow(() -> new RuntimeException("The id gave was not found!"));
-
-        Content content = ContentMapper.INSTANCE.toContent(contentEntity);
+        List<ContentEntity> contentEntities = contentRepository.queryContent(queryContentRequest);
+        List<Content> contents = contentEntities.stream()
+                .map(ContentMapper.INSTANCE::toContent)
+                .collect(Collectors.toList());
         return QueryContentResponse.builder()
-                .id(content.getId())
-                .location(content.getLocation())
-                .text(content.getText())
-                .createdAt(content.getCreatedAt())
-                .updatedAt(content.getUpdatedAt())
+                .contents(contents)
                 .build();
     }
 

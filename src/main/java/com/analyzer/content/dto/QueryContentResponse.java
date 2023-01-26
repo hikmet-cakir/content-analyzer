@@ -1,9 +1,10 @@
 package com.analyzer.content.dto;
 
+import com.analyzer.content.model.Content;
 import lombok.Builder;
 import lombok.Data;
 
-import java.util.Date;
+import java.util.List;
 
 /**
  * @author Hikmet
@@ -13,13 +14,5 @@ import java.util.Date;
 @Builder
 public class QueryContentResponse {
 
-    private String id;
-
-    private String location;
-
-    private String text;
-
-    private Date createdAt;
-
-    private Date updatedAt;
+    List<Content> contents;
 }

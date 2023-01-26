@@ -4,6 +4,7 @@ package com.analyzer.content.entity;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
+import lombok.experimental.FieldNameConstants;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -18,6 +19,7 @@ import java.util.Date;
 @Getter
 @Setter
 @Entity
+@FieldNameConstants
 @Table(name = "content")
 public class ContentEntity {
     @Id
