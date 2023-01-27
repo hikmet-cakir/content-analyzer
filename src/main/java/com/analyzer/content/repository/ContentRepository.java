@@ -28,7 +28,7 @@ public interface ContentRepository extends JpaRepository<ContentEntity, String>,
             }
 
             if(queryContentRequest.getText() != null) {
-                predicates.add(builder.like(root.get(ContentEntity.Fields.text), queryContentRequest.getText()));
+                predicates.add(builder.like(root.get(ContentEntity.Fields.text), "%" + queryContentRequest.getText() + "%"));
             }
 
             if(queryContentRequest.getLocation() != null) {
