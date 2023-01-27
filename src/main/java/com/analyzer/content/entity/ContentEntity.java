@@ -1,16 +1,13 @@
 package com.analyzer.content.entity;
 
 
-import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.experimental.FieldNameConstants;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.Id;
 import javax.persistence.Table;
-import java.util.Date;
 
 /**
  * @author Hikmet
@@ -21,20 +18,11 @@ import java.util.Date;
 @Entity
 @FieldNameConstants
 @Table(name = "content")
-public class ContentEntity {
-    @Id
-    @Column(name = "id")
-    private String id;
+public class ContentEntity extends BaseEntity {
 
     @Column(name = "location")
     private String location;
 
     @Column(name = "text")
     private String text;
-
-    @Column(name = "created_at")
-    private Date createdAt;
-
-    @Column(name = "updated_at")
-    private Date updatedAt;
 }
